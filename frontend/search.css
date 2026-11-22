@@ -1,0 +1,310 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fcf9f6; /* දුඹුරු පැහැයට ගැලපෙන සැහැල්ලු background එකක් */
+    color: #3e2723; /* තද දුඹුරු පැහැති අකුරු */
+}
+
+/* Header & Navigation */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.1);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 15px;
+}
+
+.logo img {
+    height: 50px; 
+    width: auto;
+    display: block;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #7B3F00 !important; /* Chocolate Brown Logo Text */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #5d4037;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #7B3F00 !important; /* Active/Hover Chocolate Brown */
+}
+
+/* Footer */
+footer {
+    background-color: #2d1e18; /* ඉතා තද චොකලට් දුඹුරු පැහැති Footer එක */
+    color: #a1887f;
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   Room Availability Search Page Specific Styles
+   ========================================== */
+
+/* Main Container Layout */
+.search-page-container {
+    max-width: 900px;
+    margin: 140px auto 60px auto; 
+    padding: 0 20px;
+}
+
+/* Search Card Design */
+.search-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(93, 64, 55, 0.05);
+    border-top: 5px solid #7B3F00 !important; /* Chocolate Brown ඉහළ Border එක */
+    margin-bottom: 40px;
+}
+
+.search-card h2 {
+    color: #7B3F00 !important; /* Chocolate Brown මාතෘකාව */
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.search-subtext {
+    color: #6d4c41;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+/* Form Layout Grid */
+.form-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4e342e;
+}
+
+/* Input & Select Box styling */
+.form-group input[type="date"],
+.form-group select {
+    padding: 12px 15px;
+    border: 1px solid #d7ccc8;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #3e2723;
+    background-color: #fdfbfb;
+    outline: none;
+    transition: 0.3s;
+    font-family: inherit;
+}
+
+.form-group input[type="date"]:focus,
+.form-group select:focus {
+    border-color: #7B3F00 !important;
+    box-shadow: 0 0 5px rgba(123, 63, 0, 0.2);
+    background-color: #fff;
+}
+
+/* Main Search Button */
+.btn-search {
+    width: 100%;
+    background-color: #b85306 !important; /* Warm Amber බොත්තම */
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(184, 83, 6, 0.3);
+}
+
+.btn-search:hover {
+    background-color: #9c4403 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(184, 83, 6, 0.5);
+}
+
+/* Results Section styling */
+.results-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(93, 64, 55, 0.03);
+}
+
+.results-section h3 {
+    color: #3e2723;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid #f5ebe6;
+    padding-bottom: 10px;
+}
+
+.results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Result Box */
+.result-item {
+    display: flex;
+    border: 1px solid #f5ebe6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.result-item:hover {
+    border-color: #7B3F00 !important;
+    background-color: #fdfaf7;
+}
+
+.result-img {
+    flex: 1;
+    max-width: 200px;
+}
+
+.result-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.result-info {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.result-info h4 {
+    color: #7B3F00 !important; /* Room Name Chocolate Brown */
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.result-info p {
+    font-size: 14px;
+    color: #8d6e63;
+    margin-bottom: 15px;
+}
+
+.price-tag {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b85306 !important; /* Price Tag Warm Amber */
+    margin-bottom: 10px;
+}
+
+/* Individual Select Button */
+.btn-select {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: #7B3F00 !important;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-select:hover {
+    background-color: #5c2e00 !important;
+}
+
+/* Responsive adjustments for Mobile/Tablets */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    .search-page-container {
+        margin-top: 40px;
+    }
+    
+    .form-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .result-item {
+        flex-direction: column;
+    }
+    
+    .result-img {
+        max-width: 100%;
+        height: 150px;
+    }
+    
+    .btn-select {
+        position: static;
+        margin-top: 15px;
+        text-align: center;
+        width: 100%;
+    }
+}

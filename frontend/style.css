@@ -1,0 +1,493 @@
+/* ==========================================
+   Global & Base Styles (දුඹුරු සහ ක්‍රීම් තේමාව)
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f7f3ee; /* Soft Cream පසුබිම */
+    color: #3e2723; /* Dark Brown අකුරු */
+}
+
+/* Header & Navigation Menu */
+header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(62, 39, 35, 0.05);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 15px;
+}
+
+.logo img {
+    height: 50px; 
+    width: auto;
+    display: block;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4e342e; /* Dark Brown */
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #70574e;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #a1887f; /* Warm Taupe */
+}
+
+/* ==========================================
+   Home Page - Asymmetric Hero Section Design
+   ========================================== */
+.hero {
+    background-color: #2b1d19; /* Deep Rich Brown */
+    min-height: 90vh;
+    padding: 160px 10% 80px 5%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.hero-left {
+    flex: 0.8;
+    text-align: left;
+}
+
+.hero-left h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.hero-left .tagline {
+    font-size: 20px;
+    color: #d7ccc8;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Hero Section එකේ ඇති Book Now බොත්තම */
+.btn-hero-book {
+    display: inline-block;
+    margin-top: 30px; /* පාඨයේ සිට බොත්තමට ඇති පරතරය */
+    background-color: #f7f3ee; /* Soft Cream පසුබිම් වර්ණය */
+    color: #2b1d19; /* තද දුඹුරු පැහැති අකුරු */
+    padding: 15px 50px; /* 👈 මෙයින් බොත්තමේ පළල සහ උස ලස්සනට වැඩි කරයි */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 30px; /* දෙපැත්ත රවුම් කිරීමට */
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* මවුස් එක බොත්තම මතට ගෙන යන විට සිදුවන වෙනස (Hover Effect) */
+.btn-hero-book:hover {
+    background-color: #efebe9; /* වර්ණය මඳක් තද වේ */
+    color: #2b1d19;
+    transform: translateY(-3px); /* බොත්තම මඳක් ඉහළට එසවේ */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Asymmetric Image Grid (අසමමිතික රූප රාමුව) */
+.hero-right-gallery {
+    flex: 1.8;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    height: 450px;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.box-1 { grid-column: 1; height: 100%; }
+.box-2 { grid-column: 2; height: 85%; margin-top: 15%; }
+.box-3 { grid-column: 3; height: 100%; }
+
+/* Welcome Section */
+.welcome-section {
+    padding: 100px 10%;
+    background-color: #f7f3ee;
+}
+
+.welcome-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.welcome-left-img {
+    flex: 1;
+    height: 380px;
+    border-left: 8px solid #a1887f;
+    padding-left: 20px;
+}
+
+.welcome-left-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.welcome-content {
+    flex: 1.2;
+}
+
+.welcome-content h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #3e2723;
+}
+
+.welcome-content p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #5d4037;
+    margin-bottom: 30px;
+}
+
+
+
+/* About Us Section */
+.about-section {
+    background-color: #efebe9; /* Slightly darker cream */
+    padding: 100px 10%;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    flex: 1.2;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    color: #3e2723;
+}
+
+.about-content p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #5d4037;
+}
+
+.about-image {
+    flex: 1;
+    height: 380px;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Our Best Service (Facilities) Section Boxes */
+.services-section {
+    padding: 100px 10%;
+    text-align: center;
+    background-color: #f7f3ee;
+}
+
+.services-section h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #3e2723;
+}
+
+.services-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background-color: #3e2723; /* Rich Dark Brown */
+    color: #ffffff;
+    padding: 50px 30px;
+    flex: 1;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    background-color: #4e342e;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.service-card i {
+    font-size: 35px;
+    color: #d7ccc8;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d7ccc8;
+}
+
+/* ==========================================
+   Rooms & Accommodation Page Specific Styles
+   ========================================== */
+.rooms-hero {
+    background-color: #3e2723; /* Dark Brown වෙනස් කරන ලදී */
+    color: white;
+    text-align: center;
+    padding: 140px 20px 60px 20px;
+}
+
+.rooms-hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.rooms-hero p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.rooms-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.room-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(62, 39, 35, 0.05);
+    display: flex;
+    transition: 0.3s;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(62, 39, 35, 0.12);
+}
+
+.room-image {
+    flex: 1.2;
+    min-height: 300px;
+}
+
+.room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.room-details {
+    flex: 1.8;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.room-details h2 {
+    color: #4e342e; /* Dark Brown වෙනස් කරන ලදී */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.room-desc {
+    color: #5d4037;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.room-info {
+    background-color: #efebe9; /* Cream Box වෙනස් කරන ලදී */
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #4e342e;
+    margin-bottom: 20px;
+    border-left: 4px solid #70574e;
+}
+
+.room-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-top: 1px solid #efebe9;
+    border-bottom: 1px solid #efebe9;
+    padding: 15px 0;
+}
+
+.room-meta .guests {
+    font-size: 15px;
+    color: #70574e;
+    font-weight: 600;
+}
+
+.room-meta .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #a1887f; /* Luxury Gold/Taupe වර්ණය */
+}
+
+.room-meta .price span {
+    font-size: 14px;
+    color: #8d6e63;
+    font-weight: normal;
+}
+
+.btn-book-room {
+    display: inline-block;
+    background-color: #4e342e; /* Dark Brown Button */
+    color: white;
+    text-align: center;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: 0.3s;
+    align-self: flex-start;
+    box-shadow: 0 4px 10px rgba(78, 52, 46, 0.2);
+}
+
+.btn-book-room:hover {
+    background-color: #70574e;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   Footer Layout
+   ========================================== */
+footer {
+    background-color: #1a0f0d;
+    color: #8d6e63;
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    border-top: 1px solid #2b1d19;
+}
+
+/* ==========================================
+   Responsive design for Mobile Displays
+   ========================================== */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+        flex-direction: column;
+        padding: 15px;
+    }
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 5px 10px;
+    }
+    .hero {
+        padding: 60px 20px;
+        text-align: center;
+    }
+    .hero-container, .welcome-container, .about-container, .services-grid {
+        flex-direction: column;
+        gap: 35px;
+    }
+    .hero-left h1 { font-size: 40px; }
+    .hero-right-gallery { height: 250px; width: 100%; }
+    .welcome-left-img, .about-image { height: 250px; width: 100%; }
+    
+    .room-card {
+        flex-direction: column;
+    }
+    .room-image {
+        min-height: 200px;
+    }
+    .room-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .btn-book-room {
+        width: 100%;
+    }
+}

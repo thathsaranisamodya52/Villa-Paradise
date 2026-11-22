@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f3e9df 0%, #e4cbb5 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 920px;
+}
+
+.login-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(44, 30, 22, 0.15);
+    min-height: 540px;
+}
+
+/* Left Panel - Image Side */
+.left-panel {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 300px;
+}
+
+.overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.75) 100%);
+    height: 100%;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.brand-badge {
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    color: #b85d19;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.bottom-caption {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.back-btn {
+    width: 38px;
+    height: 38px;
+    background-color: #b85d19;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #964911;
+}
+
+.bottom-caption p {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Right Panel - Form Side */
+.right-panel {
+    flex: 1.15;
+    padding: 50px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fafafa;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-icon {
+    width: 56px;
+    height: 56px;
+    border: 2px solid #e0d3c8;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.form-header h2 {
+    font-size: 22px;
+    color: #2c1e16;
+    font-weight: 600;
+}
+
+.error-msg {
+    background-color: #fde8e8;
+    color: #c81e1e;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: #eceae8;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #b85d19;
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 13px;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+    user-select: none;
+}
+
+.field-error {
+    color: #c81e1e;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #b85d19;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #964911;
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.signup-text a {
+    color: #b85d19;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .login-card {
+        flex-direction: column;
+    }
+    .left-panel {
+        min-height: 220px;
+    }
+    .right-panel {
+        padding: 35px 25px;
+    }
+}
+
+.brand-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Logo එක කොටු හැඩයටම පෙනීමට අවශ්‍ය නම් මෙම පේළිය ඉවත් කරන්න */
+    object-fit: cover;
+    background: #ffffff;
+    padding: 3px;
+}

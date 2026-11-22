@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fcf9f6; /* දුඹුරු පැහැයට ගැලපෙන සැහැල්ලු background එකක් */
+    color: #3e2723; /* තද දුඹුරු පැහැති අකුරු */
+}
+
+/* Header & Navigation Styles */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.1); /* Soft brown shadow */
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 15px;
+}
+
+.logo img {
+    height: 50px; 
+    width: auto;
+    display: block;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #7B3F00 !important; /* Chocolate Brown Logo Text */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #5d4037; /* Mild brown link text */
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #7B3F00 !important; /* Active/Hover Chocolate Brown */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #2d1e18; /* ඉතා තද චොකලට් දුඹුරු පැහැති Footer එක */
+    color: #a1887f;
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   Dashboard Table Specific Styles
+   ========================================== */
+.dashboard-container {
+    max-width: 1100px;
+    margin: 140px auto 60px auto;
+    padding: 0 20px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(93, 64, 55, 0.05);
+    border-top: 5px solid #7B3F00 !important; /* Chocolate Brown ඉහළ Border එක */
+}
+
+.dashboard-card h2 {
+    color: #7B3F00 !important; /* Chocolate Brown මාතෘකාව */
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.dashboard-subtext {
+    color: #6d4c41; /* Mild brown subtext */
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+/* Table Design */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.bookings-table th {
+    background-color: #fdfaf7; /* වගුවේ ඉහළ තීරුවට ලා දුඹුරු පැහැයක් */
+    color: #4e342e; /* තද දුඹුරු අකුරු */
+    font-weight: 600;
+    padding: 16px 20px;
+    border-bottom: 2px solid #f5ebe6;
+    font-size: 15px;
+}
+
+.bookings-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f5ebe6;
+    font-size: 15px;
+    color: #5d4037;
+    vertical-align: middle;
+}
+
+.bookings-table tbody tr:hover {
+    background-color: #fdfaf7; /* Row එකක් උඩට යද්දී ලා දුඹුරු පැහැ වීම */
+}
+
+.price-col {
+    font-weight: bold;
+    color: #b85306 !important; /* මිල ගණන් Warm Amber වර්ණයෙන් */
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.status-confirmed {
+    background-color: #e6f7ed;
+    color: #2e7d32;
+}
+
+.status-pending {
+    background-color: #fff8e1;
+    color: #f57f17;
+}
+
+.status-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Cancel Button Styling */
+.btn-cancel {
+    background-color: #b85306 !important; /* වෙනස් කරන ලදි: පරණ රතු පාට වෙනුවට Warm Amber */
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #9c4403 !important;
+    box-shadow: 0 2px 5px rgba(184, 83, 6, 0.3);
+}
+
+/* Mobile Responsive Table (Stack Layout) */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+        flex-direction: column;
+        padding: 15px;
+    }
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 5px 10px;
+    }
+    .dashboard-container {
+        margin-top: 40px;
+    }
+    
+    /* Table හැඩය වෙනස් කර පේළි එක මත එක තැබීම */
+    .bookings-table thead {
+        display: none;
+    }
+    .bookings-table tr {
+        display: block;
+        border: 1px solid #f5ebe6;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #fff;
+    }
+    .bookings-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px dashed #f5ebe6;
+        padding: 10px 5px;
+        text-align: right;
+    }
+    .bookings-table td:last-child {
+        border-bottom: none;
+    }
+    .bookings-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #8d6e63;
+        float: left;
+        margin-right: 15px;
+    }
+}
+
