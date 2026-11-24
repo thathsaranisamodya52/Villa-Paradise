@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../backend/My_db.php'; // මෙහි $pdo ඇත
+require_once '../backend/My_db.php'; 
 
 $error = "";
 $success = "";
@@ -15,36 +15,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Server-side Validation
     if (empty($name) || empty($email) || empty($contact) || empty($password)) {
-        $error = "කරුණාකර සියලුම විස්තර ඇතුළත් කරන්න.";
+        $error = "Please enter all details.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "නිවැරදි Email ලිපිනයක් ඇතුළත් කරන්න.";
+        $error = "Please enter a valid email address.";
     } elseif ($password !== $confirm_password) {
-        $error = "ඇතුළත් කළ Password දෙක සමාන නොවේ.";
+        $error = "The passwords do not match.";
     } elseif (strlen($password) < 6) {
-        $error = "Password එක අවම වශයෙන් අක්ෂර 6ක් වත් විය යුතුය.";
+        $error = "Password must be at least 6 characters long.";
     } else {
         try {
-            // PDO මඟින් Email එක දැනටමත් තිබේදැයි පරීක්ෂා කිරීම
+            
             $checkStmt = $pdo->prepare("SELECT user_id FROM users WHERE email = ?");
             $checkStmt->execute([$email]);
 
             if ($checkStmt->rowCount() > 0) {
-                $error = "මෙම Email ලිපිනය දැනටමත් ලියාපදිංචි කර ඇත.";
+                $error = "This email address is already registered.";
             } else {
                 // Password Hashing
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                // PDO මඟින් Database එකට දත්ත ඇතුළත් කිරීම
+                
                 $stmt = $pdo->prepare("INSERT INTO users (name, email, contact_number, password, role) VALUES (?, ?, ?, ?, ?)");
                 
                 if ($stmt->execute([$name, $email, $contact, $hashed_password, $role])) {
-                    $success = "ලියාපදිංචිය සාර්ථකයි! දැන් ඔබට Login විය හැක.";
+                    $success = "Registration successful! You can now login.";
                 } else {
-                    $error = "දෝෂයක් සිදු විය. කරුණාකර නැවත උත්සාහ කරන්න.";
+                    $error = "An error occurred. Please try again.";
                 }
             }
         } catch (PDOException $e) {
-            $error = "Database දෝෂයකි: " . $e->getMessage();
+            $error = "Database error: " . $e->getMessage();
         }
     }
 }
@@ -184,23 +184,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.querySelectorAll('.field-error').forEach(el => el.textContent = '');
 
             if (name.length < 3) {
-                document.getElementById('nameError').textContent = 'නිවැරදි සම්පූර්ණ නම ඇතුළත් කරන්න.';
+                document.getElementById('nameError').textContent = 'Please enter a valid full name.';
                 valid = false;
             }
             if (!email || !email.includes('@')) {
-                document.getElementById('emailError').textContent = 'නිවැරදි Email ලිපිනයක් ඇතුළත් කරන්න.';
+                document.getElementById('emailError').textContent = 'Please enter a valid email address.';
                 valid = false;
             }
             if (contact.length < 9 || isNaN(contact)) {
-                document.getElementById('contactError').textContent = 'නිවැරදි දුරකථන අංකයක් ඇතුළත් කරන්න.';
+                document.getElementById('contactError').textContent = 'Please enter a valid phone number.';
                 valid = false;
             }
             if (password.length < 6) {
-                document.getElementById('passwordError').textContent = 'Password එක අවම අක්ෂර 6ක් විය යුතුය.';
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long.';
                 valid = false;
             }
             if (password !== confirm) {
-                document.getElementById('confirmError').textContent = 'Password දෙක සමාන නොවේ.';
+                document.getElementById('confirmError').textContent = 'The passwords do not match.';
                 valid = false;
             }
 

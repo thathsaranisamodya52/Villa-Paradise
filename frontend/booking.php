@@ -1,20 +1,22 @@
 <?php
 session_start();
 
-// පරිශීලකයා Login වී නැතිනම් login.php පිටුවට යොමු කිරීම
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 include '../backend/My_db.php';
 
-// URL එකෙන් room_id එකක් ඇවිත් තියෙනවාදැයි බැලීම
+
 $selected_room_id = isset($_GET['room_id']) ? intval($_GET['room_id']) : 0;
+$pre_checkin = isset($_GET['checkin']) ? $_GET['checkin'] : '';
+$pre_checkout = isset($_GET['checkout']) ? $_GET['checkout'] : '';
 
 $success_message = false;
 $error_message = "";
 
-// 1. Server-Side Processing: Form එක Submit කළ විට ක්‍රියාත්මක වන කොටස
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $guest_name = trim($_POST['guest_name']);
     $guest_email = trim($_POST['guest_email']);
@@ -23,28 +25,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_in = $_POST['check_in_date'];
     $check_out = $_POST['check_out_date'];
 
-    // Server-side Validation
+    
     if (empty($guest_name) || empty($guest_email) || empty($guest_phone) || empty($room_id) || empty($check_in) || empty($check_out)) {
-        $error_message = "කරුණාකර සියලුම විස්තර ඇතුළත් කරන්න.";
+        $error_message = "Please fill in all the details.";
     } elseif (strtotime($check_in) >= strtotime($check_out)) {
-        $error_message = "පිටවන දිනය පැමිණෙන දිනයට වඩා පසු දිනයක් විය යුතුය.";
+        $error_message = "The check-out date must be after the check-in date.";
     } elseif (strtotime($check_in) < strtotime(date('Y-m-d'))) {
-        $error_message = "පසුගිය දින වෙන්කරවා ගත නොහැක.";
+        $error_message = "You cannot book a room for a past date.";
     } else {
         try {
-            // A. කාමරයේ මිල සර්වර් එකෙන් තහවුරු කර ගැනීම
+        
             $room_stmt = $pdo->prepare("SELECT price_per_night FROM rooms WHERE room_id = ? AND room_status = 'available'");
             $room_stmt->execute([$room_id]);
             $room_data = $room_stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$room_data) {
-                $error_message = "තෝරාගත් කාමරය දැනට ලබාගත නොහැක.";
+                $error_message = "The selected room is not available.";
             } else {
-                // B. දින ගණන සහ මුළු මුදල සර්වර් එකෙන් ගණනය කිරීම
+                
                 $days = (strtotime($check_out) - strtotime($check_in)) / (60 * 60 * 24);
                 $total_amount = $days * $room_data['price_per_night'];
 
-                // C. පරිශීලකයා දැනටමත් ඉන්නවාදැයි බලා, නැත්නම් ලියාපදිංචි කිරීම
+                
                 $user_stmt = $pdo->prepare("SELECT user_id FROM users WHERE email = ?");
                 $user_stmt->execute([$guest_email]);
                 $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
@@ -58,26 +60,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $user_id = $pdo->lastInsertId();
                 }
 
-                // D. Overlapping බුකින් තිබේදැයි බැලීම (එකම කාමරය එකම දිනවලදී දෙන්නෙකුට දීම වැළැක්වීම)
+                
                 $check_overlap = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE room_id = ? AND booking_status = 'Confirmed' AND NOT (check_out <= ? OR check_in >= ?)");
                 $check_overlap->execute([$room_id, $check_in, $check_out]);
                 
                 if ($check_overlap->fetchColumn() > 0) {
-                    $error_message = "කණගාටුයි, ඔබ තෝරාගත් දිනවලදී මෙම කාමරය දැනටමත් වෙනත් අයෙකු වෙන්කරවා ගෙන ඇත.";
+                    $error_message = "Sorry, the selected room is not available for the chosen dates.";
                 } else {
-                    // E. බුකින් එක ඇතුළත් කිරීම
+                    
                     $booking_stmt = $pdo->prepare("INSERT INTO bookings (user_id, room_id, check_in, check_out, total_amount, booking_status) VALUES (?, ?, ?, ?, ?, 'Pending')");
                     $booking_stmt->execute([$user_id, $room_id, $check_in, $check_out, $total_amount]);
                     $success_message = true;
                 }
             }
         } catch (PDOException $e) {
-            $error_message = "පද්ධතියේ දෝෂයකි: " . $e->getMessage();
+            $error_message = "An error occurred while processing your request: " . $e->getMessage();
         }
     }
 }
 
-// Dropdown එක පිරවීමට දත්ත ගබඩාවෙන් සියලුම කාමර ලබා ගැනීම
+
 $rooms_stmt = $pdo->query("SELECT room_id, room_name, price_per_night FROM rooms WHERE room_status = 'available'");
 $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -90,7 +92,7 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Villa Paradise - Room Booking</title>
     <link rel="stylesheet" href="booking.css">
     <style>
-        /* සර්වර් Error පෙන්වීමට සරල ස්ටයිල් එකක් */
+        
         .error-msg { background-color: #ffdbdb; color: #cc0000; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-weight: 600; border-left: 5px solid #cc0000; text-align: center; }
         .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; justify-content:center; align-items:center; }
         .modal-overlay.active { display: flex; }
@@ -98,7 +100,7 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-    <!-- Navigation Menu (මෙනුව) -->
+    
     <header>
         <div class="logo">
             <a href="index.php">
@@ -127,9 +129,9 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
     <main class="booking-page-container">
         <section class="booking-card">
             <h2>Complete Your Reservation</h2>
-            <p class="booking-subtext">කාමරය වෙන්කරවා ගැනීම තහවුරු කිරීමට පහත විස්තර නිවැරදිව ඇතුළත් කරන්න.</p>
+            <p class="booking-subtext">Please enter the following details accurately to confirm your room reservation.</p>
             
-            <!-- Error එකක් ආවොත් පෙන්වීම -->
+            
             <?php if (!empty($error_message)): ?>
                 <div class="error-msg"><?php echo $error_message; ?></div>
             <?php endif; ?>
@@ -138,18 +140,18 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 <!-- Guest Details Section -->
                 <div class="form-section">
-                    <h3>1. Guest Details (අමුත්තාගේ විස්තර)</h3>
+                    <h3>1. Guest Details </h3>
                     <div class="form-group">
-                        <label for="guest-name">Full Name (සම්පූර්ණ නම)</label>
+                        <label for="guest-name">Full Name </label>
                         <input type="text" id="guest-name" name="guest_name" placeholder="John Doe" required>
                     </div>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="guest-email">Email Address (විද්‍යුත් තැපෑල)</label>
+                            <label for="guest-email">Email Address </label>
                             <input type="email" id="guest-email" name="guest_email" placeholder="johndoe@example.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="guest-phone">Contact Number (දුරකථන අංකය)</label>
+                            <label for="guest-phone">Contact Number </label>
                             <input type="tel" id="guest-phone" name="guest_phone" placeholder="0771234567" required>
                         </div>
                     </div>
@@ -157,11 +159,11 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- Room & Dates Section -->
                 <div class="form-section">
-                    <h3>2. Booking Details (වෙන්කිරීමේ විස්තර)</h3>
+                    <h3>2. Booking Details </h3>
                     <div class="form-group">
-                        <label for="room-select">Room Selection (කාමරය තෝරන්න)</label>
+                        <label for="room-select">Room Selection </label>
                         <select id="room-select" name="room_selection" required>
-                            <option value="" disabled <?php echo ($selected_room_id == 0) ? 'selected' : ''; ?>>කාමරයක් තෝරන්න...</option>
+                            <option value="" disabled <?php echo ($selected_room_id == 0) ? 'selected' : ''; ?>>Select a room...</option>
                             <?php foreach ($all_rooms as $rm): ?>
                                 <option value="<?php echo $rm['room_id']; ?>" 
                                         data-price="<?php echo $rm['price_per_night']; ?>" 
@@ -174,19 +176,19 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="check-in">Check-in Date (පැමිණෙන දිනය)</label>
-                            <input type="date" id="check-in" name="check_in_date" required>
+                            <label for="check-in">Check-in Date </label>
+                            <input type="date" id="check-in" name="check_in_date" value="<?php echo htmlspecialchars($pre_checkin); ?>" min="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="check-out">Check-out Date (පිටවන දිනය)</label>
-                            <input type="date" id="check-out" name="check_out_date" required>
+                            <label for="check-out">Check-out Date </label>
+                            <input type="date" id="check-out" name="check_out_date" value="<?php echo htmlspecialchars($pre_checkout); ?>" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
                         </div>
                     </div>
                 </div>
 
                 <!-- Price Calculation Summary Display -->
                 <div class="price-summary-box">
-                    <h3>3. Price Summary (මිල ගණන් විස්තරය)</h3>
+                    <h3>3. Price Summary </h3>
                     <div class="summary-row">
                         <span>Selected Room:</span>
                         <span id="summary-room">-</span>
@@ -196,7 +198,7 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span id="summary-nights">0</span>
                     </div>
                     <div class="summary-row total-row">
-                        <span>Total Price (මුළු මුදල):</span>
+                        <span>Total Price :</span>
                         <span id="summary-total">$0</span>
                     </div>
                 </div>
@@ -207,4 +209,58 @@ $all_rooms = $rooms_stmt->fetchAll(PDO::FETCH_ASSOC);
         </section>
     </main>
 
-    <!-- Success Alert Popup Modal -->
+    
+    <?php if ($success_message): ?>
+    <div class="modal-overlay active">
+        <div class="modal-box" style="background: #fff; padding: 30px; border-radius: 10px; text-align: center; max-width: 420px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            <h3 style="color: #2e7d32; margin-bottom: 10px;">Reservation Confirmed!</h3>
+            <p style="color: #555; margin-bottom: 20px;">Your booking request has been submitted successfully.</p>
+            <a href="my-bookings.php" class="btn-confirm" style="display: inline-block; text-decoration: none; padding: 10px 25px;">Go to My Bookings</a>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const roomSelect = document.getElementById("room-select");
+            const checkinInput = document.getElementById("check-in");
+            const checkoutInput = document.getElementById("check-out");
+
+            const summaryRoom = document.getElementById("summary-room");
+            const summaryNights = document.getElementById("summary-nights");
+            const summaryTotal = document.getElementById("summary-total");
+
+            function updatePriceSummary() {
+                const selectedOption = roomSelect.options[roomSelect.selectedIndex];
+                const pricePerNight = (selectedOption && selectedOption.value !== "") ? parseFloat(selectedOption.getAttribute("data-price")) : 0;
+                const roomName = (selectedOption && selectedOption.value !== "") ? selectedOption.getAttribute("data-name") : "-";
+
+                let nights = 0;
+                if (checkinInput.value && checkoutInput.value) {
+                    const start = new Date(checkinInput.value);
+                    const end = new Date(checkoutInput.value);
+                    if (end > start) {
+                        const diffTime = end - start;
+                        nights = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                    }
+                }
+
+                const totalPrice = pricePerNight * nights;
+
+                summaryRoom.textContent = roomName;
+                summaryNights.textContent = nights;
+                summaryTotal.textContent = "$" + totalPrice.toFixed(2);
+            }
+
+            roomSelect.addEventListener("change", updatePriceSummary);
+            checkinInput.addEventListener("change", updatePriceSummary);
+            checkoutInput.addEventListener("change", updatePriceSummary);
+
+            
+            updatePriceSummary();
+        });
+    </script>
+
+</body>
+</html>

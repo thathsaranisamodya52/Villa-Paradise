@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #fcf9f6; /* දුඹුරු පැහැයට ගැලපෙන සැහැල්ලු background එකක් */
-    color: #3e2723; /* තද දුඹුරු පැහැති අකුරු */
+    background-color: #fcf9f6; 
+    color: #3e2723; 
 }
 
 /* Header & Navigation Styles */
@@ -68,7 +68,7 @@ nav ul li a:hover, nav ul li a.active {
 
 /* Footer Styling */
 footer {
-    background-color: #2d1e18; /* ඉතා තද චොකලට් දුඹුරු පැහැති Footer එක */
+    background-color: #2d1e18; 
     color: #a1887f;
     text-align: center;
     padding: 25px;
@@ -89,11 +89,11 @@ footer {
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(93, 64, 55, 0.05);
-    border-top: 5px solid #7B3F00 !important; /* Chocolate Brown ඉහළ Border එක */
+    border-top: 5px solid #7B3F00 !important;
 }
 
 .dashboard-card h2 {
-    color: #7B3F00 !important; /* Chocolate Brown මාතෘකාව */
+    color: #7B3F00 !important; 
     font-size: 28px;
     margin-bottom: 8px;
 }
@@ -117,8 +117,8 @@ footer {
 }
 
 .bookings-table th {
-    background-color: #fdfaf7; /* වගුවේ ඉහළ තීරුවට ලා දුඹුරු පැහැයක් */
-    color: #4e342e; /* තද දුඹුරු අකුරු */
+    background-color: #fdfaf7; 
+    color: #4e342e; 
     font-weight: 600;
     padding: 16px 20px;
     border-bottom: 2px solid #f5ebe6;
@@ -134,12 +134,12 @@ footer {
 }
 
 .bookings-table tbody tr:hover {
-    background-color: #fdfaf7; /* Row එකක් උඩට යද්දී ලා දුඹුරු පැහැ වීම */
+    background-color: #fdfaf7;
 }
 
 .price-col {
     font-weight: bold;
-    color: #b85306 !important; /* මිල ගණන් Warm Amber වර්ණයෙන් */
+    color: #b85306 !important;
 }
 
 /* Status Badges */
@@ -169,7 +169,7 @@ footer {
 
 /* Cancel Button Styling */
 .btn-cancel {
-    background-color: #b85306 !important; /* වෙනස් කරන ලදි: පරණ රතු පාට වෙනුවට Warm Amber */
+    background-color: #b85306 !important;
     color: white;
     border: none;
     padding: 6px 14px;
@@ -204,7 +204,7 @@ footer {
         margin-top: 40px;
     }
     
-    /* Table හැඩය වෙනස් කර පේළි එක මත එක තැබීම */
+    
     .bookings-table thead {
         display: none;
     }

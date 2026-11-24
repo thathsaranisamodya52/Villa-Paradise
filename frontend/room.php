@@ -3,20 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// backend ෆෝල්ඩරයේ ඇති My_db.php සම්බන්ධ කිරීම
+
 include '../backend/My_db.php';
 
 try {
-    // දත්ත ගබඩාවෙන් දැනට ලබාගත හැකි (available) සියලුම කාමර ලබා ගැනීම
+    
     $stmt = $pdo->query("SELECT * FROM rooms WHERE room_status = 'available' ORDER BY room_id DESC");
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    die("දත්ත ලබා ගැනීමට නොහැකි විය: " . $e->getMessage());
+    die("Unable to retrieve data: " . $e->getMessage());
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@ try {
 </head>
 <body>
 
-    <!-- Navigation Menu (මෙනුව) -->
+    <!-- Navigation Menu  -->
     <header>
         <div class="logo">
             <a href="index.php">
@@ -53,7 +53,7 @@ try {
     <!-- Rooms Page Heading -->
     <section class="rooms-hero">
         <h1>Rooms & Accommodation</h1>
-        <p>ඔබගේ නිවාඩුව උපරිම සුඛෝපභෝගීත්වයෙන් ගත කිරීමට අප සතු කාමර පහසුකම්</p>
+        <p>Your perfect stay starts here. Discover our comfortable rooms and suites designed for your comfort.</p>
     </section>
 
     <!-- Rooms List Section -->
@@ -62,7 +62,7 @@ try {
         <?php if (count($rooms) > 0): ?>
             <?php foreach ($rooms as $room): ?>
                 <?php 
-                    // Database එකේ image එකක් ඇත්නම් එය ගැනීම, නැතිනම් default පින්තූරයක් යෙදීම
+                    
                     $room_img = !empty($room['image']) ? $room['image'] : ($room['room_type'] == 'Deluxe' ? 'room.webp' : 'family.jpg');
                 ?>
                 <div class="room-card">
@@ -88,7 +88,7 @@ try {
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p style="text-align: center; width: 100%; font-size: 18px; color: #666;">දැනට ලබාගත හැකි කාමර කිසිවක් නැත.</p>
+            <p style="text-align: center; width: 100%; font-size: 18px; color: #666;">No rooms available at the moment.</p>
         <?php endif; ?>
 
     </section>

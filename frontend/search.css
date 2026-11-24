@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #fcf9f6; /* දුඹුරු පැහැයට ගැලපෙන සැහැල්ලු background එකක් */
-    color: #3e2723; /* තද දුඹුරු පැහැති අකුරු */
+    background-color: #fcf9f6; 
+    color: #3e2723; 
 }
 
 /* Header & Navigation */
@@ -68,7 +68,7 @@ nav ul li a:hover, nav ul li a.active {
 
 /* Footer */
 footer {
-    background-color: #2d1e18; /* ඉතා තද චොකලට් දුඹුරු පැහැති Footer එක */
+    background-color: #2d1e18; 
     color: #a1887f;
     text-align: center;
     padding: 25px;
@@ -97,7 +97,7 @@ footer {
 }
 
 .search-card h2 {
-    color: #7B3F00 !important; /* Chocolate Brown මාතෘකාව */
+    color: #7B3F00 !important; 
     font-size: 28px;
     margin-bottom: 8px;
 }
@@ -152,7 +152,7 @@ footer {
 /* Main Search Button */
 .btn-search {
     width: 100%;
-    background-color: #b85306 !important; /* Warm Amber බොත්තම */
+    background-color: #b85306 !important; 
     color: white;
     border: none;
     padding: 15px;

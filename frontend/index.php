@@ -12,13 +12,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villa Paradise - Home</title>
-    <!-- Font Awesome Icons සම්බන්ධ කිරීම -->
+    
     <link rel="stylesheet" href="https://cloudflare.com">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 1. Header & Navigation (මෙනුව) -->
+    <!-- 1. Header & Navigation  -->
     <header>
         <div class="logo">
             <a href="#">
@@ -30,9 +30,9 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php#about">About Us</a></li>
-                <li><a href="room.php">Facilities</a></li> <!-- Rooms පිටුවට සම්බන්ධ කළා -->
-                <li><a href="search.php">Book Now</a></li> <!-- 👈 අලුතින් එකතු කළා -->
-                <li><a href="my-bookings.php">My Bookings</a></li> <!-- 👈 අලුතින් එකතු කළා -->
+                <li><a href="room.php">Facilities</a></li> 
+                <li><a href="search.php">Book Now</a></li> 
+                <li><a href="my-bookings.php">My Bookings</a></li> 
                 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li><a href="logout.php" style="color: #b85d19; font-weight: bold;">Logout (<?php echo htmlspecialchars($_SESSION['user_name']); ?>)</a></li>
@@ -43,7 +43,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </nav>
     </header>
 
-    <!-- 2. Hero Section (මුල් දර්ශනය) -->
+    <!-- 2. Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-left">

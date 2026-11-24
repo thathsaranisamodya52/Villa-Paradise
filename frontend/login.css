@@ -233,7 +233,7 @@ body {
 .brand-logo {
     width: 45px;
     height: 45px;
-    border-radius: 50%; /* Logo එක කොටු හැඩයටම පෙනීමට අවශ්‍ය නම් මෙම පේළිය ඉවත් කරන්න */
+    border-radius: 50%; 
     object-fit: cover;
     background: #ffffff;
     padding: 3px;

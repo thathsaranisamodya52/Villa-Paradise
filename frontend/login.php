@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../backend/My_db.php'; // මෙහි $pdo ඇත
+require_once '../backend/My_db.php'; 
 
 $error = "";
 
@@ -9,22 +9,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     if (empty($email) || empty($password)) {
-        $error = "කරුණාකර Email සහ Password ඇතුළත් කරන්න.";
+        $error = "Please enter your email and password.";
     } else {
         try {
-            // PDO මඟින් පරිශීලකයාගේ විස්තර ලබා ගැනීම
+            
             $stmt = $pdo->prepare("SELECT user_id, name, password, role FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                // Password එක පරීක්ෂා කිරීම
+                
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['user_name'] = $user['name'];
                     $_SESSION['role'] = $user['role'];
 
-                    // Role එක අනුව අදාළ පිටුවට යොමු කිරීම
+                    
                     if ($user['role'] === 'admin') {
                         header("Location: admin-dashboard.php");
                     } elseif (isset($_SESSION['redirect_url'])) {
@@ -37,13 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     exit();
                 } else {
-                    $error = "ඇතුළත් කළ Password එක වැරදියි.";
+                    $error = "The entered password is incorrect.";
                 }
             } else {
-                $error = "මෙම Email ලිපිනය සඳහා ගිණුමක් නොමැත.";
+                $error = "There is no account associated with this email address.";
             }
         } catch (PDOException $e) {
-            $error = "Database දෝෂයකි: " . $e->getMessage();
+            $error = "Database error: " . $e->getMessage();
         }
     }
 }
@@ -131,11 +131,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById('passwordError').textContent = '';
 
             if (!email || !email.includes('@')) {
-                document.getElementById('emailError').textContent = 'නිවැරදි Email ලිපිනයක් ඇතුළත් කරන්න.';
+                document.getElementById('emailError').textContent = 'Please enter a valid email address.';
                 valid = false;
             }
             if (password.length < 4) {
-                document.getElementById('passwordError').textContent = 'Password එක ඇතුළත් කරන්න.';
+                document.getElementById('passwordError').textContent = 'Password must be at least 4 characters long.';
                 valid = false;
             }
 

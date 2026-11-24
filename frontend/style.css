@@ -1,5 +1,5 @@
 /* ==========================================
-   Global & Base Styles (දුඹුරු සහ ක්‍රීම් තේමාව)
+   Global & Base Styles 
    ========================================== */
 * {
     margin: 0;
@@ -9,8 +9,8 @@
 }
 
 body {
-    background-color: #f7f3ee; /* Soft Cream පසුබිම */
-    color: #3e2723; /* Dark Brown අකුරු */
+    background-color: #f7f3ee; 
+    color: #3e2723; 
 }
 
 /* Header & Navigation Menu */
@@ -113,32 +113,32 @@ nav ul li a:hover, nav ul li a.active {
     opacity: 0.9;
 }
 
-/* Hero Section එකේ ඇති Book Now බොත්තම */
+
 .btn-hero-book {
     display: inline-block;
-    margin-top: 30px; /* පාඨයේ සිට බොත්තමට ඇති පරතරය */
-    background-color: #f7f3ee; /* Soft Cream පසුබිම් වර්ණය */
-    color: #2b1d19; /* තද දුඹුරු පැහැති අකුරු */
-    padding: 15px 50px; /* 👈 මෙයින් බොත්තමේ පළල සහ උස ලස්සනට වැඩි කරයි */
+    margin-top: 30px; 
+    background-color: #f7f3ee; 
+    color: #2b1d19; 
+    padding: 15px 50px; 
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1px;
-    border-radius: 30px; /* දෙපැත්ත රවුම් කිරීමට */
+    border-radius: 30px; 
     transition: 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* මවුස් එක බොත්තම මතට ගෙන යන විට සිදුවන වෙනස (Hover Effect) */
+
 .btn-hero-book:hover {
-    background-color: #efebe9; /* වර්ණය මඳක් තද වේ */
+    background-color: #efebe9; 
     color: #2b1d19;
-    transform: translateY(-3px); /* බොත්තම මඳක් ඉහළට එසවේ */
+    transform: translateY(-3px); 
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 
-/* Asymmetric Image Grid (අසමමිතික රූප රාමුව) */
+
 .hero-right-gallery {
     flex: 1.8;
     display: grid;
@@ -306,7 +306,7 @@ nav ul li a:hover, nav ul li a.active {
    Rooms & Accommodation Page Specific Styles
    ========================================== */
 .rooms-hero {
-    background-color: #3e2723; /* Dark Brown වෙනස් කරන ලදී */
+    background-color: #3e2723; 
     color: white;
     text-align: center;
     padding: 140px 20px 60px 20px;
